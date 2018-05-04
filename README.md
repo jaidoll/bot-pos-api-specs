@@ -61,20 +61,21 @@
         {
             "name": "",
             "id": "",
+            "imageUrl": "",
             "price": 2000,
-            "isDiscount": false,
+            "isDiscount": true,
             "discountAmount": 500,
             "options": [
                 "", ""
             ],
-            "status": "notSale"
+            "status": "sale"
         },
         {
-            "name": "아메리카노",
+            "name": "아메리카노 라지",
             "id": "",
-            "price": 2000,
+            "price": 2500,
             "isDiscount": false,
-            "discountAmount": 500,
+            "discountAmount": 0,
             "options": [
                 "", ""
             ],
