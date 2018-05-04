@@ -1,7 +1,15 @@
 {
     "version": "",
     "status": "",
-    "reason": "",    
+    "reason": "",
+    "orderInfo": {
+        "orderId": "",
+        "orderer": {
+            "id": "",
+            "name": "",
+            "company": ""
+        }
+    },
     "storeInfo": {
         "status": "",
         "waitingCount": 0,
