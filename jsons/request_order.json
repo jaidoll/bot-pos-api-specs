@@ -1,0 +1,19 @@
+{    
+    "version": "",
+    "orderId": "",
+    "orderer": {
+        "id": "",
+        "name": "",
+        "company": ""
+    },
+    "orderCount": 1,
+    "orders": [
+        {
+            "id": "",
+            "name": "",
+            "options": [],
+            "amount": 0            
+        }
+    ],
+    "extra": {}
+}

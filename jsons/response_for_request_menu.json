@@ -1,0 +1,31 @@
+{
+    "version": "",
+    "storeId": "pan-n8",
+    "storeStatus": "open",
+    "itemCount": 5,
+    "items": [
+        {
+            "name": "",
+            "id": "",
+            "price": 2000,            
+            "isDiscount": false,
+            "discountAmount": 500,
+            "options": [
+                "", ""
+            ],
+            "status": "notSale"
+        },
+        {
+            "name": "아메리카노",
+            "id": "",
+            "price": 2000,            
+            "isDiscount": false,
+            "discountAmount": 500,
+            "options": [
+                "", ""
+            ],
+            "status": "sale"
+        }
+    ],
+    "extra": {}    
+}
