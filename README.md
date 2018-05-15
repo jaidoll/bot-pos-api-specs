@@ -8,11 +8,13 @@
 
 ### 주문
 
+1. 자연어로 주문한다. (아메리카노 얼음 많이 1개)
+
 1. 메뉴를 조회한다
 1. 주문 항목을 선택한다
     1. 어떤걸
     1. 몇개
-    1. 옵션 (얼음 적게)
+    1. 옵션 (얼음 적게)(옵션을 자유롭게 적을 수 있을지 혹은 지정된 형식이 있을지)
 1. 항목을 추가할 수 있다. (1로 돌아가 반복)
 1. 주문 완료
 
@@ -53,38 +55,71 @@
 
 ```json
 {
-    "version": "",
-    "storeId": "pan-n8",
-    "storeStatus": "open",
+    "version": "v1",
+    "store": {
+        "storeId": "pan-n8",
+        "storeName": "카카오 8층 카페",
+        "storeStatus": "open",
+    },
     "itemCount": 5,
     "items": [
         {
-            "name": "",
-            "id": "",
-            "imageUrl": "",
-            "price": 2000,
+            "itemName": "아이스 아메리카노",
+            "itemId": "1",
+            "itemImageUrl": "http://path.to",
+            "itemPrice": 2000,
             "isDiscount": true,
             "discountAmount": 500,
-            "options": [
-                "", ""
+            "itemOptions": [
+                {
+                    "optionName": "얼음 적게",
+                    "optionPrice": 0
+                },
+                {
+                    "optionName": "샷 추가",
+                    "optionPrice": 200
+                }
             ],
-            "status": "sale"
+            "itemStatus": "sale",
+            "itemProduceTime": 300
         },
         {
-            "name": "아메리카노 라지",
-            "id": "",
-            "price": 2500,
+            "itemName": "아이스 아메리카노 라지",
+            "itemId": "2",
+            "itemImageUrl": "http://path.to",
+            "itemPrice": 2500,
             "isDiscount": false,
             "discountAmount": 0,
-            "options": [
-                "", ""
+            "itemOptions": [
+                {
+                    "optionName": "얼음 적게",
+                    "optionPrice": 0
+                },
+                {
+                    "optionName": "샷 추가",
+                    "optionPrice": 200
+                }
             ],
-            "status": "sale"
+            "itemStatus": "sale",
+            "itemProduceTime": 300
         }
     ],
     "extra": {}
 }
 ```
+
+
+### 메뉴 확인
+
+봇 -> POS -> 봇
+
+Entity validation에서 쓰일 예정. 자세한 스펙 추가 필요.
+
+### 옵션 확인
+
+봇 -> POS -> 봇
+
+Entity validation에서 쓰일 예정. 자세한 스펙 추가 필요.
 
 ### 주문 요청
 
@@ -95,22 +130,34 @@
 
 ```json
 {
-    "version": "",
-    "orderId": "",
+    "version": "v1",
     "orderer": {
-        "id": "",
-        "name": "",
-        "company": ""
+        "ordererId": "bart.lee",
+        "ordererName": "이철민",
+        "ordererCompany": "kakao"
     },
-    "orderCount": 1,
+    "orderAmount": 3,
     "orders": [
         {
-            "id": "",
-            "name": "",
-            "options": [],
-            "amount": 0
+            "itemId": "1",
+            "itemName": "아이스 아메리카노",
+            "itemOptions": [
+                "얼음 적게"
+            ],
+            "itemAmount": 1,
+            "itemPrice": 1500
+        },
+        {
+            "itemId": "2",
+            "itemName": "아이스 아메리카노 라지",
+            "itemOptions": [
+                "샷 추가"
+            ],
+            "itemAmount": 2,
+            "itemPrice": 5400
         }
     ],
+    "totalPrice": 6900,
     "extra": {}
 }
 ```
@@ -119,25 +166,46 @@ POS -> 봇 응답
 
 ```json
 {
-    "version": "",
-    "status": "",
+    "version": "v1",
+    "status": "OK",
     "reason": "",
-    "orderInfo": {
-        "orderId": "",
+    "order": {
+        "orderId": "uuid",
         "orderer": {
-            "id": "",
-            "name": "",
-            "company": ""
+            "ordererId": "bart.lee",
+            "ordererName": "이철민",
+            "ordererCompany": "kakao"
         }
     },
-    "storeInfo": {
-        "status": "",
-        "waitingCount": 0,
-        "waitings": [
-        ]
-    }
+    "store": {
+        "storeId": "",
+        "storeName": "",
+        "storeStatus": "Open",
+    },
+    "waitingCount": 4,
+    "waitings": [
+        {
+            "orderId": "uuid",
+            "orderProduceTime": 300
+        },
+        {
+            "orderId": "uuid",
+            "orderProduceTime": 300
+        },
+        {
+            "orderId": "uuid",
+            "orderProduceTime": 300
+        },
+        {
+            "orderId": "uuid",
+            "orderProduceTime": 300
+        }
+    ]
 }
 ```
+
+`orderId`는 POS에서 무작위로 생성한 unique id 문자열입니다.
+waitingCount, waitings 는 전체 대기열을 주시는게 밑의 `주문 상태 조회`쪽과 동일한 로직으로 돌릴 수 있을테니 좋지 않을까요?
 
 ### 주문 상태 조회
 
@@ -147,27 +215,65 @@ POS -> 봇 응답
 > 예: <POS_API>/api/v1/order/stores/:storeId/order/:orderId
 
 POS -> 봇 응답
-> 주문 시와 같습니다.
 
 ```json
 {
-    "version": "",
-    "status": "",
+    "version": "v1",
+    "status": "OK",
     "reason": "",
-    "orderInfo": {
-        "orderId": "",
+    "store": {
+        "storeId": "",
+        "storeName": "",
+        "storeStatus": "Open",
+    },
+    "order": {
+        "orderId": "uuid",
         "orderer": {
-            "id": "",
-            "name": "",
-            "company": ""
+            "ordererId": "bart.lee",
+            "ordererName": "이철민",
+            "ordererCompany": "kakao"
         }
     },
-    "storeInfo": {
-        "status": "",
-        "waitingCount": 0,
-        "waitings": [
-        ]
-    }
+    "orderAmount": 3,
+    "orders": [
+        {
+            "itemId": "1",
+            "itemName": "아이스 아메리카노",
+            "itemOptions": [
+                "얼음 적게"
+            ],
+            "itemAmount": 1,
+            "itemPrice": 1500
+        },
+        {
+            "itemId": "2",
+            "itemName": "아이스 아메리카노 라지",
+            "itemOptions": [
+                "샷 추가"
+            ],
+            "itemAmount": 2,
+            "itemPrice": 5400
+        }
+    ],
+    "waitingOrderCount": 4,
+    "waitingOrders": [
+        {
+            "orderId": "uuid",
+            "orderProduceTime": 300
+        },
+        {
+            "orderId": "uuid",
+            "orderProduceTime": 300
+        },
+        {
+            "orderId": "uuid",
+            "orderProduceTime": 300
+        },
+        {
+            "orderId": "uuid",
+            "orderProduceTime": 300
+        }
+    ]
 }
 ```
 
@@ -181,24 +287,40 @@ POS -> 봇 : `POST` 요청
 ```json
 {
     "version": "",
-    "orderId": "",
-    "orderInfo": {
+    "store": {
+        "storeId": "",
+        "storeName": "",
+        "storeStatus": "Open",
+    },
+    "order": {
+        "orderId": "uuid",
         "orderer": {
-            "id": "",
-            "name": "",
-            "company": ""
+            "ordererId": "bart.lee",
+            "ordererName": "이철민",
+            "ordererCompany": "kakao"
+        }
+    },
+    "orderAmount": 3,
+    "orders": [
+        {
+            "itemId": "1",
+            "itemName": "아이스 아메리카노",
+            "itemOptions": [
+                "얼음 적게"
+            ],
+            "itemAmount": 1,
+            "itemPrice": 1500
         },
-        "orderCount": 1,
-        "orders": [
-            {
-                "id": "",
-                "name": "",
-                "options": [],
-                "amount": 0
-            }
-        ],
-        "extra": {}
-    }
+        {
+            "itemId": "2",
+            "itemName": "아이스 아메리카노 라지",
+            "itemOptions": [
+                "샷 추가"
+            ],
+            "itemAmount": 2,
+            "itemPrice": 5400
+        }
+    ]
 }
 ```
 
