@@ -70,7 +70,7 @@
     "store": {
         "storeId": "pan-n8",
         "storeName": "카카오 8층 카페",
-        "storeStatus": "open",
+        "storeStatus": "open"
     },
     "itemCount": 5,
     "items": [
