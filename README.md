@@ -81,18 +81,6 @@
             "itemPrice": 2000,
             "isDiscount": true,
             "discountAmount": 500,
-            "itemOptions": [
-                {
-                    "optionId": "",
-                    "optionName": "얼음 적게",
-                    "optionPrice": 0
-                },
-                {
-                    "optionId": "",
-                    "optionName": "샷 추가",
-                    "optionPrice": 200
-                }
-            ],
             "itemStatus": "sale",
             "itemProduceTime": 300
         },
@@ -103,18 +91,6 @@
             "itemPrice": 2500,
             "isDiscount": false,
             "discountAmount": 0,
-            "itemOptions": [
-                {
-                    "optionId": "",
-                    "optionName": "얼음 적게",
-                    "optionPrice": 0
-                },
-                {
-                    "optionId": "",
-                    "optionName": "샷 추가",
-                    "optionPrice": 200
-                }
-            ],
             "itemStatus": "sale",
             "itemProduceTime": 300
         }
@@ -157,18 +133,12 @@ Entity validation에서 쓰일 예정. 자세한 스펙 추가 필요.
         {
             "itemId": "1",
             "itemName": "아이스 아메리카노",
-            "itemOptions": [
-                "얼음 적게"
-            ],
             "itemAmount": 1,
             "itemPrice": 1500
         },
         {
             "itemId": "2",
             "itemName": "아이스 아메리카노 라지",
-            "itemOptions": [
-                "샷 추가"
-            ],
             "itemAmount": 2,
             "itemPrice": 5400
         }
@@ -255,18 +225,12 @@ POS -> 봇 응답
             {
                 "itemId": "1",
                 "itemName": "아이스 아메리카노",
-                "itemOptions": [
-                    "얼음 적게"
-                ],
                 "itemAmount": 1,
                 "itemPrice": 1500
             },
             {
                 "itemId": "2",
                 "itemName": "아이스 아메리카노 라지",
-                "itemOptions": [
-                    "샷 추가"
-                ],
                 "itemAmount": 2,
                 "itemPrice": 5400
             }
@@ -323,18 +287,12 @@ POS -> 봇 : `POST` 요청
             {
                 "itemId": "1",
                 "itemName": "아이스 아메리카노",
-                "itemOptions": [
-                    "얼음 적게"
-                ],
                 "itemAmount": 1,
                 "itemPrice": 1500
             },
             {
                 "itemId": "2",
                 "itemName": "아이스 아메리카노 라지",
-                "itemOptions": [
-                    "샷 추가"
-                ],
                 "itemAmount": 2,
                 "itemPrice": 5400
             }
