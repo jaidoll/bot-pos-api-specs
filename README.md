@@ -60,9 +60,9 @@
 
 ### 메뉴 조회
 
-봇 → POS(POS API 서버) → 봇
+`봇 → POS(POS API) → 봇`
 
-봇 → POS: `GET` 요청
+봇 → POS : `GET` 요청
 > 예: <POS_API>/api/v1/stores/:storeId/menu
 
 그에 따른 응답 예상
@@ -109,24 +109,24 @@
 
 특정 문자열이 판매 중인 메뉴인지 확인하는 API입니다. 예를 들어 "아이스아메리카노" 가 실제 판매 중인 메뉴 이름인지 질의하고 그에 따른 결과를 받습니다.
 
-봇 -> POS API 서버 -> 봇
+`봇 -> POS(POS API) -> 봇`
 
 Entity validation에서 쓰일 예정. 자세한 스펙 추가 필요. 급한게 아니니 일단 스킵.
 
-1안: POS API 서버로 항상 물어본다. 파라미터 검증 API를 도입.
-2안: 하루에 한번 정도 entity를 갱신.
-2-1: 수동으로 엔티티를 업데이트 (...)
-2-2: 파라미터 검증 API를 쓰긴 하는데 타겟이 우리 내부 서버.
+* 1안: POS API 서버로 항상 물어본다. 파라미터 검증 API를 도입.
+* 2안: 하루에 한번 정도 entity를 갱신.
+    * 2-1: 수동으로 엔티티를 업데이트 (...)
+    * 2-2: 파라미터 검증 API를 쓰긴 하는데 타겟이 우리 내부 서버.
 
 ### 주문 요청
 
-최종 흐름은 "봇 → POS(POS API -> POS 기계 -> POS API) → 봇" 이지만, [POS API - POS 기계] 데이터 전달 특성 상 2단계를 거쳐서 이루어 집니다.
+최종 흐름은 `"봇 → POS(POS API -> POS 기계 -> POS API) → 봇"` 이지만, [POS API - POS 기계] 데이터 전달 특성 상 2단계를 거쳐서 이루어 집니다.
 
 #### 주문 요청 및 대기
 
-봇 → POS(POS API) -> 봇
+`봇 → POS(POS API) -> 봇`
 
-봇 → POS: `POST` 요청
+봇 → POS : `POST` 요청
 > 예: <POS_API>/api/v1/stores/:storeId/order
 
 ```json
@@ -157,7 +157,7 @@ Entity validation에서 쓰일 예정. 자세한 스펙 추가 필요. 급한게
 }
 ```
 
-POS API -> 봇 응답
+POS API -> 봇 : 응답
 
 ```json
 {
@@ -177,7 +177,7 @@ POS API -> 봇 응답
 
 POS API 서버와 POS 기계 간 데이터 전달이 완료된 상태입니다. 즉 POS 기계에서 주문 접수 혹은 실패가 실제로 이루어진 상태를 봇쪽으로 PUSH 해주는 상황입니다.
 
-POS API -> 봇
+`POS API -> 봇`
 
 ```json
 {
@@ -225,12 +225,12 @@ POS API -> 봇
 
 스토어 아이디와 주문 아이디를 갖고 현재 어느 상태인지를 질의하는 API 입니다.
 
-봇 → POS API → 봇
+`봇 → POS API → 봇`
 
-봇 -> POS: `GET` 요청
+봇 -> POS : `GET` 요청
 > 예: <POS_API>/api/v1/order/stores/:storeId/order/:orderId
 
-POS -> 봇 응답
+POS -> 봇 : 응답
 
 ```json
 {
@@ -293,7 +293,7 @@ POS -> 봇 응답
 
 주문한 아이템이 완료되었을 경우 알림을 주는 API 입니다. 전통적인 시스템의 진동벨의 역할입니다.
 
-(POS기계 -> POS API서버) → 봇
+`(POS기계 -> POS API서버) → 봇`
 
 POS -> 봇 : `POST` 요청
 > 예: <BOT_API>/api/v1/order/complete
@@ -334,7 +334,7 @@ POS -> 봇 : `POST` 요청
 
 ### 취소 요청
 
-봇 → POS → 봇
+`봇 → POS → 봇`
 
 *미정* 취소가 가능할지 여부에 따라 취소 요청 API 존재 여부가 갈리게 됩니다. 주문 대기 상태일 때 취소가 가능 하지않을까 싶긴 합니다만.
 
