@@ -23,7 +23,7 @@ api prefix : `/api/kakao/v1`
 
    **Required:**
 
-   `storeId=[integer]`
+   `storeId=[string]`
 
 * **Data Params**
 
@@ -62,7 +62,7 @@ api prefix : `/api/kakao/v1`
 
    **Required:**
 
-   `storeId=[integer]`
+   `storeId=[string]`
 
 * **Data Params**
 
@@ -103,7 +103,7 @@ api prefix : `/api/v1`
 
    **Required:**
 
-   `storeId=[integer]`
+   `storeId=[string]`
 
 * **Data Params**
 
@@ -218,7 +218,7 @@ api prefix : `/api/v1`
 
    **Required:**
 
-   `storeId=[integer]`
+   `storeId=[string]`
 
 * **Data Params**
 
